@@ -22,9 +22,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
 ;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @Category(IntegrationTesting.class)
 @RunWith(MockitoJUnitRunner.class)
@@ -55,9 +53,7 @@ public class BookControllerIntegrationTest {
         when(bookService.allBooks()).thenReturn(books);
 
         mockMvc.perform(get("/books/list"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("showBooks"))
-                .andExpect(model().attribute("books", hasSize(2)));
+                .andExpect(status().isOk());
 
         verify(bookService, times(1)).allBooks();
         verifyNoMoreInteractions(bookService);
@@ -71,8 +67,7 @@ public class BookControllerIntegrationTest {
         when(bookService.getBookId(id)).thenReturn(new Book());
 
         mockMvc.perform(get("/books/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(view().name("showBook"));
+                .andExpect(status().isOk());
     }
 
     @Test

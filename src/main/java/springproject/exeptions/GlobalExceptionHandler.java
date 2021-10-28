@@ -1,8 +1,11 @@
 package springproject.exeptions;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * This class presents a global exceptions handler.
@@ -13,8 +16,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BookNotFoundException.class)
-    public String handlerBookNotFoundException(BookNotFoundException e, Model model) {
-        model.addAttribute("errorMessage", e.getMessage());
-        return "errorPage";
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public String handlerBookNotFoundException(BookNotFoundException e) {
+        return e.getMessage();
     }
 }

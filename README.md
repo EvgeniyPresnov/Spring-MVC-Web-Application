@@ -1,5 +1,5 @@
 # Getting Started
-This step illustrates the simple web application has implemented by Spring MVC features
+This step illustrates the simple web application has implemented by Spring MVC RESTful features
 
 # Installing 
 
@@ -37,19 +37,43 @@ After that open the browser
 http://localhost:8080/books/list
 ```
 
-We will have the following endpoints
+To verify this Rest API we will use Postman rest client
+
+We will have the following rest web service endpoints
 
 | URI | HTTP Method | Details |
 |-----------------|:----------------:|-----------:|
-|/books/list        | GET  | To get the list of all the books|
-|/books/{id}        | GET  | To get the book by id           |
-|/books/add         | POST | To create the book              |
-|/books/edit/{id}   | POST | To update the book              |
-|/books/delete/{id} | GET  | To delete the book by id        | 
+|/books/list      | GET  | To get the list of all the books|
+|/books/{id}      | GET  | To get the book by id           |
+|/books/{id}      | POST  | To create the book              |
+|/books/{id}      | PUT | To update the book              |
+|/books/{id}      | DELETE  | To delete the book by id        | 
 
+*  Get all books
+  
+![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/get_operation_list.png)
+
+* Get book by id
+![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/get_operation_id.png)
+
+* Update book by id
+![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/put_operation_(1).png)
+
+![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/put_operation_(2).png)
+
+* Delete book by id
+![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/delete_operation_(1).png)
+
+![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/delete_operation_(2).png)
+
+* Create book
+![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/post_operation_(1).png)
+
+![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/post_operation_(2).png)
 
 # Build With
 * [Maven](https://maven.apache.org/) - Dependency Management
+* [Postman](https://www.postman.com/) - For the execution of API tests
 
 # License
 ```

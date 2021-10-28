@@ -2,10 +2,8 @@ package springproject.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import springproject.exeptions.BookNotFoundException;
@@ -15,6 +13,7 @@ import springproject.utils.BookValidator;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.List;
 
 /**
  * This class handles the requests which URL ends with "/books"
@@ -22,15 +21,12 @@ import javax.annotation.PreDestroy;
  * @author Presnov Evgeniy
  */
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/books")
 public class BookController {
 
     @Autowired
     private BookService bookService;
-
-    @Autowired
-    private BookValidator bookValidator;
 
     @PostConstruct
     private void startLogging() {
@@ -38,123 +34,87 @@ public class BookController {
     }
 
     /**
-     * The method adds a custom validator for checking of fullness the fields on the form
+     * This method gets the books REST API
      *
-     * @param binder
-     */
-    @InitBinder
-    private void initBinder(WebDataBinder binder) {
-        binder.setValidator(bookValidator);
-    }
-
-    /**
-     * The method handles the GET request which URL ends with "/books/list"
-     *
-     * @param model
-     * @return a form that display the list of books in data base
+     * @return the books in data base
      */
     @GetMapping("/list")
-    public String getBooks(Model model) {
-        model.addAttribute("books", bookService.allBooks());
+    public ResponseEntity<List<Book>> getAllBooks() {
         log.info("The list of the books'" + "\n");
-        return "showBooks";
+        return new ResponseEntity<>(bookService.allBooks(), HttpStatus.OK);
     }
 
     /**
-     *  The method handles the GET request which URL ends with "/books/id"
+     * This method get book by id REST API
      *
      * @param id
-     * @param model
-     * @return a form that displays info about the book
+     * @return the book by id
      */
     @GetMapping("/{id}")
-    public String getBookById(@PathVariable("id") int id, Model model) {
+    public ResponseEntity<Book> getBookById(@PathVariable("id") int id) {
+        Book book = null;
         try {
             if (bookService.checkExistBook(id)) {
-                model.addAttribute("book", bookService.getBookId(id));
                 log.info("Getting the book by id = " + id + "\n");
+                book = bookService.getBookId(id);
             }
         } catch (Exception e) {
             log.error("This book does not exist by book's id = " + id + "\n");
-            throw new BookNotFoundException("This book does not exist by id = " + id);
+            throw new BookNotFoundException("This book does not exist by this id = " + id);
         }
-        return "showBook";
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
     /**
-     * The method handles the GET request which URL ends with "/books/edit/id"
+     * This method updates the book REST API
      *
-     * @param model
      * @param id
-     * @return a form that displays info about the book for editing
-     */
-    @GetMapping("/edit/{id}")
-    public String editBook(Model model, @PathVariable("id") int id) {
-        model.addAttribute("book", bookService.getBookId(id));
-        log.info("Ediding info about the book by id = " + id + "\n");
-        return "editBook";
-    }
-
-    /**
-     * This method invokes during editing the fields on the form
-     *
      * @param book
-     * @param bindingResult
-     * @param id
-     * @return  a form that displays the books from data base after adding editing the book
+     * @return
      */
-    @PostMapping("/{id}")
-    public String updateBook(@ModelAttribute("book") @Validated Book book, BindingResult bindingResult,
-                               @PathVariable("id") int id) {
-        if (bindingResult.hasErrors()) {
-            log.error("The data from the from don't valid by id = " + id + "\n");
-            return "editBook";
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable("id") int id, @RequestBody Book book) {
+        try {
+            bookService.checkExistBook(id);
+        } catch (Exception e) {
+            log.error("This book does not exist by book's id = " + id + "\n");
+            throw new BookNotFoundException("This book does not exist by this id = " + id);
         }
         bookService.updateBook(id, book);
-        log.info("Updating info about the book by id = " + id + "\n");
-        return "redirect:/books/list";
+        log.info("Updating the book by id = " + id + "\n");
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
     /**
-     * The method handles the GET request which URL ends with "/books/delete/id"
+     * This method deletes the book from data base REST API
      *
      * @param id
-     * @return a form that displays the books from data base after deleting the book
+     * @return
      */
-    @GetMapping("delete/{id}")
-    public String deleteBook(@PathVariable("id") int id) {
-        bookService.deleteBook(id);
-        log.info("Deleting info about the book by id = " + id + "\n");
-        return "redirect:/books/list";
-    }
-
-    /**
-     * The method handles the GET request which URL ends with "/books/add"
-     *
-     * @param book
-     * @return a form for filling info about a new book
-     */
-    @GetMapping("/add")
-    public String newAuthor(@ModelAttribute("book") Book book) {
-        return "newBook";
-    }
-
-    /**
-     * This method invokes during filling info about a new book on the form
-     *
-     * @param book
-     * @param bindingResult
-     * @return a form that displays the books from data base after adding a new book
-     */
-    @PostMapping()
-    public String addAuthor(@ModelAttribute("book") @Validated Book book, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            log.error("The data from the from don't valid" + "\n");
-            return "newBook";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Integer> deleteBook(@PathVariable("id") int id) {
+        try {
+            bookService.checkExistBook(id);
+        } catch (Exception e) {
+            log.error("This book does not exist by book's id = " + id + "\n");
+            throw new BookNotFoundException("This book does not exist by this id = " + id);
         }
+        bookService.deleteBook(id);
+        log.info("Deleting the book by id = " + id + "\n");
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    /**
+     * This method adds the book in data base REST API
+     *
+     * @param book - the book will be updating
+     * @return
+     */
+    @PostMapping
+    public ResponseEntity<Book> addBook(@RequestBody Book book) {
         bookService.saveBook(book);
         log.info("Adding a new book" + "\n");
-        return "redirect:/books/list";
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
     @PreDestroy
