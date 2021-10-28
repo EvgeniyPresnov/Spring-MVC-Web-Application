@@ -51,25 +51,25 @@ We will have the following rest web service endpoints
 
 *  Get all books
   
-![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/get_operation_list.png)
+![](https://github.com/ZhekaPresnov/Spring-MVC-Web-Application/blob/master/pic/get_operation_list.png)
 
 * Get book by id
-![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/get_operation_id.png)
+![](https://github.com/ZhekaPresnov/Spring-MVC-Web-Application/blob/master/pic/get_operation_id.png)
 
 * Update book by id
-![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/put_operation_(1).png)
+![](https://github.com/ZhekaPresnov/Spring-MVC-Web-Application/blob/master/pic/put_operation_(1).png)
 
-![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/put_operation_(2).png)
+![](https://github.com/ZhekaPresnov/Spring-MVC-Web-Application/blob/master/pic/put_operation_(2).png)
 
 * Delete book by id
-![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/delete_operation_(1).png)
+![](https://github.com/ZhekaPresnov/Spring-MVC-Web-Application/blob/master/pic/delete_operation_(1).png)
 
-![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/delete_operation_(2).png)
+![](https://github.com/ZhekaPresnov/Spring-MVC-Web-Application/blob/master/pic/delete_operation_(2).png)
 
 * Create book
-![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/post_operation_(1).png)
+![](https://github.com/ZhekaPresnov/Spring-MVC-Web-Application/blob/master/pic/post_operation_(1).png)
 
-![](https://github.com/ZhekaPresnov/Spring-Web-Application/blob/dev/pic/post_operation_(2).png)
+![](https://github.com/ZhekaPresnov/Spring-MVC-Web-Application/blob/master/pic/post_operation_(2).png)
 
 # Build With
 * [Maven](https://maven.apache.org/) - Dependency Management
