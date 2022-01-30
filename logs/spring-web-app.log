@@ -1,0 +1,18 @@
+2022-01-30 21:48:39,849 INFO o.s.b.StartupInfoLogger [main] Starting SpringBootCrudApplication using Java 1.8.0_231 on WGD02RTI957 with PID 30180 (C:\MyProjects\SpringBootCRUD\target\classes started by evgeniy.presnov in C:\MyProjects\SpringBootCRUD)
+2022-01-30 21:48:39,855 DEBUG o.s.b.StartupInfoLogger [main] Running with Spring Boot v2.6.3, Spring v5.3.15
+2022-01-30 21:48:39,856 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-01-30 21:48:44,746 INFO o.s.b.StartupInfoLogger [main] Started SpringBootCrudApplication in 5.646 seconds (JVM running for 7.076)
+2022-01-30 21:49:18,555 INFO r.h.s.c.BookController [http-nio-8080-exec-2] The list of the books
+
+2022-01-30 21:49:25,679 INFO r.h.s.c.BookController [http-nio-8080-exec-3] The book will be deleted: Book(id=8, author=Qwerty, title=qwertt, price=0.79)
+
+2022-01-30 21:49:25,689 INFO r.h.s.c.BookController [http-nio-8080-exec-3] Getting the book: Book(id=8, author=Qwerty, title=qwertt, price=0.79) by id = 8
+
+2022-01-30 21:49:25,754 INFO r.h.s.c.BookController [http-nio-8080-exec-3] The book was deleted
+
+2022-01-30 21:49:25,782 INFO r.h.s.c.BookController [http-nio-8080-exec-4] The list of the books
+
+2022-01-30 21:49:46,354 INFO r.h.s.c.BookController [http-nio-8080-exec-6] Adding a new book: Book(id=10, author=Jane Austen II, title=qwerty, price=100.0)
+
+2022-01-30 21:49:46,366 INFO r.h.s.c.BookController [http-nio-8080-exec-7] The list of the books
+
