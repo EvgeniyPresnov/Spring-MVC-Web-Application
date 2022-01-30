@@ -23,12 +23,7 @@ mvn integration-test
 ## Build the project
 
 ```
-mvn clean install
-```
-
-Start the embedded Tomcat server
-```
-mvn tomcat7:run
+mvn spring-boot:run
 ```
 
 After that open the browser 
