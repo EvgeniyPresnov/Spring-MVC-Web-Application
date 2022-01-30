@@ -1,14 +1,10 @@
-DROP DATABASE IF EXISTS webappdb;
-
-CREATE DATABASE IF NOT EXISTS webappdb;
-
-USE webappdb;
+drop table book;
 
 create table book (
-  id int primary key not null auto_increment,
-  author varchar(30) not null,
-  title varchar(50) not null,
-  price decimal(5, 2) not null
+    id serial primary key not null,
+    author varchar(30) not null,
+    title varchar(50) not null,
+    price decimal(5, 2) not null
 );
 
 INSERT INTO book VALUES (1, 'JRR Tolkien', 'The Lord of the Rings', 31.43);
