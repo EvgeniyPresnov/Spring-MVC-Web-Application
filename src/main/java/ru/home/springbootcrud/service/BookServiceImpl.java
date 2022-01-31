@@ -2,11 +2,11 @@ package ru.home.springbootcrud.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.home.springbootcrud.entity.Book;
 import ru.home.springbootcrud.exception.BookNotFoundException;
 import ru.home.springbootcrud.repository.BookRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
